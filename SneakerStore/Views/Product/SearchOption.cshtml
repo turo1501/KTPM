@@ -1,0 +1,89 @@
+﻿@*@model IEnumerable<SneakerStore.Models.Product>*@
+@using SneakerStore.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
+<style>
+    .btn {
+        border-radius: 5px;
+    }
+
+    .MenuPage li {
+        display: inline
+    }
+
+    #div-ds {
+        text-align: center;
+        background-color: #f5f5f5;
+        height: 50px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .pro {
+        height: 270px;
+        width: 230px;
+        box-shadow: 0 0 1px 1px gray;
+        background-color: white;
+        border-radius: 3px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+        .pro:hover {
+            cursor: pointer;
+        }
+    .container {
+        width: 1000px;
+    }
+    .price {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 2rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+
+    .items-dong {
+        font-size: 2rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+</style>
+@using (Html.BeginForm("SearchOption", "Product"))
+{
+    <div style="margin-top:90px;">
+        <span>
+            <span><input type="number" name="min" placeholder="₫ TỪ" style="border-radius:3px; width:80px;" /></span>
+            <span>-</span>
+            <span><input type="number" name="max" placeholder="₫ ĐẾN" style="border-radius:3px;width:80px;" /></span>
+        </span>
+    </div>
+    <div><input type="submit" value="ÁP DỤNG" style="background-color:#fa532f; width:130px; border-radius:5px; color:white; margin:20px 40px;" /></div>
+    <div class="container">
+        <div class="row">
+            @foreach (var pro in Model)
+            {
+                <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/Product/DetailPro/@pro.ProductID">
+                        <div class="card-pro">
+                            <div class="pro">
+                                <p></p>
+                                <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
+                                <p>@Html.DisplayFor(model => pro.NamePro)</p>
+
+                                <span class="price"> @String.Format("{0:0,0}", pro.Price)</span>
+                                <span class="items-dong">₫</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            }
+        </div>
+    </div>
+}
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("SearchOption", new { page = page }))
+</div>
+
+

@@ -1,0 +1,140 @@
+﻿@model SneakerStore.Models.Product
+
+@{
+    ViewBag.Title = "DetailPro";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+<style>
+    body {
+        margin: -8px;
+        padding:0px;
+    }
+
+    .body-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    .dl-horizontal dt {
+        white-space: normal;
+    }
+
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
+
+    button:active {
+        border-style: inset;
+    }
+
+    button, select {
+        text-transform: none;
+    }
+
+    button, html input[type=button], input[type=reset], input[type=submit] {
+        -webkit-appearance: button;
+        cursor: pointer;
+    }
+
+    .btn-solid-primary {
+        height: 50px;
+        width: 300px;
+        background-color: #ee4d2d;
+        color: white;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer;
+        margin-top: 50px;
+        margin-left: -430px;
+    }
+
+        .btn-solid-primary:hover {
+            background-color: #f46448;
+            color: white
+        }
+
+    .price {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 3rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+
+    .items-dong {
+        font-size: 3rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+</style>
+
+<body>
+    <div>
+        <div class="div-right">
+            <br />
+            <div>
+                <img src="@Url.Content(Model.ImagePro)" height="400" width="400" style="float:left; margin-right:100px;" />
+                <dd style="font-size:35px;">
+                    @Html.DisplayFor(model => model.NamePro)
+                </dd>
+                <hr />
+                <dd>
+                    <span class="price"> @String.Format("{0:0,0}", Model.Price)</span>
+                    <span class="items-dong">₫</span>
+                </dd>
+                <br />
+                <span style="color:#757575;font-size:15px">Vận Chuyển </span>
+                <span style="padding-left:20px">
+                    <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/1cdd37339544d858f4d0ade5723cd477.png" />
+                    Miễn phí vận chuyển
+                </span>
+                <hr />
+
+                <a style="padding-left:300px; text-decoration:none;" href="/ShoppingCart/AddToCart/@Model.ProductID">
+
+                    <button type="button" class="btn btn-solid-primary btn--l vQ3lCI" aria-disabled="false">
+                        Mua ngay
+                    </button>
+                </a>
+
+                <a style="padding-left:450px;" href="/ShoppingCart/ShowCart">
+
+                    <button type="button" class="btn btn-solid-primary btn--l vQ3lCI" aria-disabled="false">
+                        Giỏ hàng
+                    </button>
+                </a>
+
+            </div>
+
+
+            <div style="float:left">
+                <h2>MÔ TẢ SẢN PHẨM</h2>
+                <hr />
+                <dd style="font-size:18px;float">
+                    @Html.DisplayFor(model => model.DecriptionPro)
+
+                </dd>
+                <hr />
+                </p>
+                <p style="font-size:18px">✔️Đủ size Nam nữ : 36 - 43</p>
+                <p style="font-size:18px">✔️Hàng chất lượng, giá cực kì cạnh tranh do shop liên kết trực tiếp với xưởng sản xuất</p>
+                <p style="font-size:18px">✔️Quý khách cứ yên tâm , chúng tôi luôn đem đến cho quý khách những sản phẩm chất lượng nhất với giá thành hợp lý nhất .</p>
+                <p style="font-size:18px">✔️Bảo hành do lỗi sản xuất : 03 tháng</p>
+                <p style="font-size:18px">✔️ Giày đẹp, nhẹ, bền. Giá phải chăng phù hợp với các bạn học sinh, sinh viên. Thích hợp đi chơi, du lịch, chạy bộ, gym, đi học, đi làm...</p>
+                <p style="font-size:18px">✔️ Dễ phối đồ, có thể kết hợp với váy, jeans, sooc…. Phù hợp với mọi thời tiết từ đông sang hè.</p>
+                <br />
+                <div style="margin-bottom:50px;"></div>
+            </div>
+
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+<style>
+    .btn-mua {
+        height: 40px;
+        width: 170px;
+        background-color: #ee4d2d;
+        color: white;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer;
+        margin-left: 500px;
+    }
+
+        .btn-mua:hover {
+            background-color: #f46448;
+        }
+
+    .icon {
+        margin-top: 50px;
+        margin-left: 530px;
+    }
+</style>
+<p class="icon">
+    <img src="~/Content/images/cart.jpg" style="height:100px; width:100px;" />
+</p>
+<p style="margin-left:495px;">Giỏ hàng của bạn còn trống</p>
+<a href="@Url.Action("Index", "Product")">
+    <input type="submit" value="MUA NGAY" class="btn-mua" />
+</a>
+
+
+
+
+

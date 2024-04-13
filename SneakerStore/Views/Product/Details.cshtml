@@ -1,0 +1,25 @@
+﻿@model SneakerStore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+}
+    <img src="@Url.Content(Model.ImagePro)" height="400" width="400" />
+    @Html.DisplayFor(model => model.NamePro)
+    @*Số lượng:
+    @Html.DisplayFor(model => model.Quantity)
+    Giá:
+    @Html.DisplayFor(model => model.Price)*@
+
+<h2 style="font-weight:600">Chi tiết sản phẩm</h2>
+<dd style="font-size:15px">
+    @Html.DisplayFor(model => model.DecriptionPro)
+</dd>
+
+<p>
+    @Html.ActionLink("Back to List", "Index") |
+    <a href="/ShoppingCart/AddToCart/@Model.ProductID" class="btn btn-default" id="link-cart">Mua</a>
+</p>
+

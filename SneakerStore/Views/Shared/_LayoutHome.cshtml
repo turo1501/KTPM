@@ -1,0 +1,279 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGBEE STORE</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/assets/css/responsive.css" rel="stylesheet" />
+
+
+</head>
+
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div id="header-with-search">
+            <span class="form-group form-inline">
+                <span id="header-name">
+                    @Html.ActionLink("DOGBEE", "Index", "Home", null, new { @class = "link-item link-item-no-underline" })
+                </span>
+                @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "textbox" }))
+                {
+                    @Html.TextBox("SearchString", "", new { placeholder = "Nhập sản phẩm muốn tìm...", id = "searchkey" })
+
+                    <input type="submit" id="submit" class="form-control" value="Tìm kiếm" />
+                }
+            </span>
+        </div>
+        <nav id="header-nav">
+            <ul id="header-nav-list">
+                <li id="header-nav-item">
+
+                </li>
+                <li id="header-nav-item">
+                    <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+                </li>
+                <li style="margin:0;" id="header-nav-item">
+                    <span>|</span>
+                </li>
+                <li id="header-nav-item">
+                    <a href="@Url.Action("Index", "Product")">Sản Phẩm</a>
+                </li>
+                <li style="margin:0;" id="header-nav-item">
+                    <span>|</span>
+                </li>
+
+                <li id="header-nav-item">
+                    <a href="@Url.Action("Contact", "Home")">Liên hệ</a>
+                </li>
+                <li style="margin:0;" id="header-nav-item">
+                    <span>|</span>
+                </li>
+                <a href="/ShoppingCart/ShowCart">
+                    <span class="bi bi-cart" style="color:white;font-size:20px;"></span>
+                    @Html.Action("BagCart", "ShoppingCart")
+                </a>
+
+                @if (Session["NameCus"] == null)
+                {
+
+                    <li style="margin:0;" id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="/Customers/LoginCus" class="item" style="font-size:20px;">
+                            <span id="header-icon"></span>
+                            Đăng nhập
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li id="header-nav-item">
+                        <span>
+                            <text class="glyphicon glyphicon-user"></text>
+                            <span style="font-size:20px;">@Session["NameCus"]</span>
+                        </span>
+                    </li>
+                    <li id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="@Url.Action("LogOutCus", "Customers")" class="item">
+                            <span id="header-icon"></span>
+                            Đăng xuất
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+    </div>
+    <div>
+        @RenderBody();
+    </div>
+
+
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <div class="info_logo">
+                <h2>
+                    HandTime
+                </h2>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="info_contact">
+                        <h5>
+                            About Shop
+                        </h5>
+                        <div>
+                            <div class="img-box">
+                                <img src="~/assets/images/location-white.png" width="18px" alt="">
+                            </div>
+                            <p>
+                                Address
+                            </p>
+                        </div>
+                        <div>
+                            <div class="img-box">
+                                <img src="~/assets/images/telephone-white.png" width="12px" alt="">
+                            </div>
+                            <p>
+                                +01 1234567890
+                            </p>
+                        </div>
+                        <div>
+                            <div class="img-box">
+                                <img src="~/assets/images/envelope-white.png" width="18px" alt="">
+                            </div>
+                            <p>
+                                demo@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_info">
+                        <h5>
+                            Informations
+                        </h5>
+                        <p>
+                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="info_insta">
+                        <h5>
+                            Instagram
+                        </h5>
+                        <div class="insta_container">
+                            <div class="row m-0">
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w1.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w2.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w3.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w4.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w5.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0">
+                                    <a href="">
+                                        <div class="insta-box b-1">
+                                            <img src="~/assets/images/w6.png" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="info_form ">
+                        <h5>
+                            Newsletter
+                        </h5>
+                        <form action="">
+                            <input type="email" placeholder="Enter your email">
+                            <button>
+                                Subscribe
+                            </button>
+                        </form>
+                        <div class="social_box">
+                            <a href="">
+                                <img src="~/assets/images/fb.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="~/assets/images/twitter.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="~/assets/images/linkedin.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="~/assets/images/youtube.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end info_section -->
+    <!-- footer section -->
+    <section class="footer_section">
+        <div class="container">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="">Dỗi Store</a>
+            </p>
+        </div>
+    </section>
+    <!-- footer section -->
+    <!-- jQery -->
+    <script type="text/javascript" src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="~/assets/js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="~/assets/js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+    </script>
+    <!-- End Google Map -->
+</body>
+
+</html>

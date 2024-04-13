@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGBEE STORE</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        #div-footer {
+            position: fixed;
+            text-align: center;
+            bottom: 0;
+            left: 0;
+            padding-top: 15px;
+            height: 50px;
+            width: 100%;
+            background-color: #ededed;
+        }
+
+        .navbar-inverse {
+            height: 120px;
+            width: 100%;
+            background-image: linear-gradient(0, #fe6332, #f53e2d);
+            border: 0;
+        }
+
+        #header-nav {
+            float: right;
+            padding-right: 160px;
+            color: white;
+        }
+
+        #header-nav-list {
+            list-style: none;
+            font-size: 15px;
+            font-weight: 200;
+        }
+
+        #header-nav-item {
+            display: inline-block;
+            margin: 8px;
+            color: white;
+            font-size: 20px;
+        }
+
+        #header-icon, .item {
+            color: white;
+            text-decoration:none;
+        }
+
+            #header-icon:hover, .item:hover {
+                text-decoration: none;
+                color: whitesmoke;
+            }
+
+        #header-name {
+            font-size: 30px;
+            color: white;
+            font-family: Quicksand;
+            word-spacing: 5px;
+        }
+
+        li.format-hello {
+            padding-top: 15px;
+            color: white;
+        }
+
+        #searchkey {
+            width: 280px;
+            height: 40px;
+            margin-left: 380px;
+            position: absolute;
+            top: 50px;
+            border-radius: 8px;
+            border: none;
+            margin-top: -10px;
+        }
+
+        #submit {
+            width: 85px;
+            height: 40px;
+            position: absolute;
+            top: 50px;
+            margin-left: 670px;
+            margin-top: -10px;
+        }
+
+        #header-with-search {
+            padding: 0 160px;
+            display: inline-block;
+        }
+
+        span {
+            margin: 5px;
+        }
+
+        #div-content {
+            margin: 0 160px;
+        }
+
+        .link-item {
+            color: white;
+            font-size: 65px;
+            text-decoration: none;
+        }
+
+            .link-item:hover {
+                color: white;
+            }
+
+        #div-container {
+            margin-right: 160px;
+        }
+
+        .render {
+            margin: 30px 160px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div id="header-with-search">
+            <span class="form-group form-inline">
+                <span id="header-name">@Html.ActionLink("DOGBEE", "Index", "Product", null, new { @class = "link-item" })</span>
+                @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "textbox" }))
+                {
+                    @Html.TextBox("SearchString", "", new { placeholder = "Nhập sản phẩm muốn tìm...", id = "searchkey" })
+
+                    <input type="submit" id="submit" class="form-control" value="Tìm kiếm" />
+                }
+            </span>
+        </div>
+        <nav id="header-nav">
+            <ul id="header-nav-list">
+                <li id="header-nav-item">
+                    <a href="/ShoppingCart/ShowCart">
+                        <span class="glyphicon glyphicon-shopping-cart" style="color:white;font-size:20px;"></span>
+                        <i class="bi bi-cart" style="color:white;font-size:20px;"></i>
+                        @Html.Action("BagCart", "ShoppingCart")
+                    </a>
+                </li>
+                @if (Session["NameCus"] == null)
+                {
+                    <li id="header-nav-item">
+                        <a href="/Customers/Create" class="item" style="font-size:unset;">
+                            <span id="header-icon"></span>
+                            Đăng ký
+                        </a>
+                    </li>
+                    <li style="margin:0;" id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="/Customers/LoginCus" class="item" style="font-size:unset;">
+                            <span id="header-icon"></span>
+                            Đăng nhập
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li id="header-nav-item"><span><text class="glyphicon glyphicon-user"></text> @Session["NameCus"]</span></li>
+                    <li id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="@Url.Action("LogOutCus", "Customers")" class="item">
+                            <span id="header-icon"></span>
+                            Đăng xuất
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+    <div class="render">
+        @RenderBody()
+    </div>
+    <div id="div-footer">
+        <p>&copy; @DateTime.Now.Year - DOGBEE STORE - HUFLIT</p>
+    </div>
+</body>
+</html>
