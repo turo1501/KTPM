@@ -4,8 +4,11 @@ DogBee Store - Cửa hàng bán giày Sneaker
 DogBee Store là một cửa hàng trực tuyến chuyên cung cấp các sản phẩm giày Sneaker với một loạt các mẫu mã và thương hiệu đa dạng. Mục tiêu của chúng tôi là cung cấp cho khách hàng trải nghiệm mua sắm thuận tiện, nhanh chóng và đáng tin cậy.
 
 # Các chức năng chính
+
 Tìm kiếm sản phẩm: Người dùng có thể tìm kiếm sản phẩm theo tên, thương hiệu hoặc danh mục.
+
 Xem thông tin sản phẩm: Người dùng có thể xem thông tin chi tiết về sản phẩm, bao gồm hình ảnh, mô tả, giá cả và đánh giá từ người dùng khác.
+
 Trang chủ/Danh sách sản phẩm: Trang chủ hiển thị các sản phẩm nổi bật hoặc mới nhất. Danh sách sản phẩm hiển thị tất cả các sản phẩm có sẵn trong cửa hàng.
 
 Trang Admin: Quản trị viên có thể thêm, sửa đổi hoặc xóa sản phẩm. Họ cũng có quyền quản lý đơn đặt hàng và người dùng.
