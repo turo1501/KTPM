@@ -93,14 +93,5 @@ namespace SneakerStore.Models
             items.Clear();
         }
 
-        public class YourModelName
-        {
-            [Required(ErrorMessage = "Vui lòng nhập NameCate")]
-            public string NameCate { get; set; }
 
-            // Các trường khác của model của bạn...
-        }
-
-        
-    }
 }
