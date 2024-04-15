@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SneakerStore.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>KHÁCH HÀNG</h2>
+
+<p>@Html.ActionLink("Tạo mới", "Create")</p>
+@using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+{
+    <input type="text" name="_nameCus" />
+    <input type="submit" value="Tìm kiếm" />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameCus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneCus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailCus)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCus)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDCus })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

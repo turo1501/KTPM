@@ -1,0 +1,126 @@
+﻿@model IEnumerable<SneakerStore.Models.Product>
+
+@{
+    ViewBag.Title = "TopNew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #btnItems {
+        margin-right: 600px;
+    }
+
+    .container {
+        width: 1000px;
+    }
+
+    .pro {
+        height: 270px;
+        width: 230px;
+        box-shadow: 0 0 1px 1px gray;
+        background-color: white;
+        border-radius: 3px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+        .pro:hover {
+            cursor: pointer;
+        }
+
+    .body-selection {
+        text-decoration: none;
+        background-color: #ededed;
+        margin-top: 20px;
+        list-style-type: none;
+        padding: 10px;
+        font-size: 17px;
+        width: 973px;
+        margin: 0 auto; /* Thêm vào đây */
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .price {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 2rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+
+    .items-dong {
+        font-size: 2rem;
+        color: #ee4d2d;
+        margin: 0;
+    }
+</style>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/Testcss/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>
+                        @{
+                            if (!String.IsNullOrEmpty(ViewBag.SearchMessage))
+                            {
+                                <text>@ViewBag.SearchMessage</text>
+                            }
+                            else
+                            {
+                                <text>DANH SÁCH SẢN MỚI NHẤT</text>
+                            }
+                        }
+                    </h2>
+                    <div class="breadcrumb__option">
+                        <a href="./index.html">Trang Chủ</a>
+                        <span>Sản Phẩm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<div class="body-selection">
+
+    <div class="form-inline">
+        <text>Sắp xếp theo</text>
+        <a href="/OrderDetail/GroupByTop" class="btn btn-default">Bán chạy </a>
+        <a href="/Product/TopNew" class="btn btn-default " id="btnItems" style="background-color:orangered; color:white;">Mới nhất</a>
+        <a href="~/Product/Index" style="color:#fd5f31; font-size:17px;">Quay lại</a>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var pro in Model)
+        {
+            <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/Product/DetailPro/@pro.ProductID">
+                    <div class="card-pro">
+                        <div class="pro">
+                            <p></p>
+                            <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
+                            <p>
+                                @{
+                                    string limitedString = pro.NamePro.Length > 30 ? pro.NamePro.Substring(0, 30) + "..." : pro.NamePro;
+                                }
+                                @limitedString
+                            </p>
+
+                            <span class="price"> @String.Format("{0:0,0}", pro.Price)</span>
+                            <span class="items-dong">₫</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        }
+    </div>
+</div>
+
+

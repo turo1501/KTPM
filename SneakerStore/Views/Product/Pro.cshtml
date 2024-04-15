@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SneakerStore.Models.Product>
+
+@{
+    ViewBag.Title = "Pro";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>SẢN PHẨM</h2>
+
+<p>@Html.ActionLink("Tạo mới", "Create")</p>
+@using (Html.BeginForm("Pro", "Product", FormMethod.Get))
+{
+    <input type="text" name="_namePro" />
+    <input type="submit" value="Tìm kiếm" />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NamePro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DecriptionPro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.NameCate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamePro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DecriptionPro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImagePro)" height="150" width="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.NameCate)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

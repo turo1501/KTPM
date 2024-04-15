@@ -1,0 +1,76 @@
+﻿    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>ViewAD</title>
+        <link rel="stylesheet" href="~/Content/css/menu.css">
+    </head>
+    <style>
+        body {
+            font-size: 20px;
+        }
+
+        li a {
+            text-decoration: none;
+            padding-right: 20px;
+            color: black;
+        }
+
+            li a:hover {
+                color: yellow;
+                background-color: black;
+                border: 1px solid yellow;
+                border-radius: 10px;
+            }
+
+        nav {
+            background-color: red;
+        }
+    </style>
+    <body>
+        <div>
+            @if (Session["NameUser"] == null)
+            {
+
+            }
+            else
+            {
+                string tmp = (string)Session["RoleUser"];
+
+                if (tmp == "Admin")
+                {
+                    <nav>
+                        <div id="vtr-nav">
+                            <ul id="ul-nav">
+                                <li><a href="~/Product/Pro">Quản lí sản phẩm</a></li>
+                                <li><a href="~/Categories/Index">Quản lí thương hiệu</a></li>
+                                <li><a href="~/Customers/Index">Quản lí khách hàng</a></li>
+                                <li><a href="~/OrderProes/Index">Quản lí đơn hàng</a></li>
+                                <li><a href="~/LoginUser/RegisterUser">Cấp quyền cho nhân viên</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <nav style="text-align:center;color:black;font-size:25px;">
+                        @Session["RoleUser"]:@Session["NameUser"]
+                        <a href="@Url.Action("LogOutUserAD", "LoginUser")" class="item"
+                   <span id="header-icon"></span>
+                        Đăng Xuất
+                    </nav>
+                }
+                else
+                {
+                    <nav style="text-align:center;color:black;font-size:25px;">
+                        @Session["RoleUser"]:@Session["NameUser"]
+                        <a href="@Url.Action("LogOutUserAD", "LoginUser")" class="item"
+                   <span id="header-icon"></span>
+                        Đăng Xuất
+                    </nav>
+                }
+
+            }
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+    </body>
+    </html>

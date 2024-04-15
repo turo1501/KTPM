@@ -1,0 +1,106 @@
+﻿@model SneakerStore.Models.Customer
+
+@{
+    ViewBag.Title = "LoginCus";
+    Layout = "~/Views/Shared/_LayoutLogIn_Register.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    #div-thongTin {
+        height: 100%;
+        width: 400px;
+        margin: 100px auto;
+        box-shadow: 0 0 5px 1px #212121;
+        text-align: center;
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    h1 {
+        padding-top: 25px;
+        padding-left: 30px;
+        margin: 0;
+        font-size: 25px;
+        font-weight: 100;
+        text-align: left;
+    }
+
+    p {
+        margin: 0;
+        font-size: 17px;
+        font-family: 'Times New Roman';
+    }
+
+    #return {
+        width: 340px;
+        height: 40px;
+        background-color: #ee4d2d;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 2px;
+        cursor: pointer;
+        border: 0;
+        color: white;
+        margin-top: 15px;
+    }
+
+    #div-return {
+        text-align: center;
+        margin: 0 10px;
+    }
+
+    #checkbox {
+        display: inline-block;
+        font-size: 15px;
+    }
+
+    .name, .password {
+        height: 40px;
+        width: 340px;
+        margin-top: 10px;
+    }
+
+    .link {
+        color: #ee5d61;
+        text-decoration: none;
+    }
+
+        .link:hover {
+            color: #ee5d61;
+            text-decoration: none;
+        }
+</style>
+@using (Html.BeginForm("LoginCus", "Customers"))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div id="div-thongTin">
+
+            <h1>Đăng nhập</h1>
+
+            <p> @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tên đăng nhập...", style = "field-validation-error", @class = "name" })</p>
+            <p> @Html.ValidationMessageFor(model => model.UserName)</p>
+
+            <p> @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Mật khẩu...", @class = "password" } })</p>
+            <p> @Html.ValidationMessageFor(model => model.Password)</p>
+
+            @if (ViewBag.ErrorInfo == null)
+            {
+                <p>@ViewBag.ErrorInfo</p>
+            }
+            <div id="div-return">
+                <input type="submit" value="Đăng nhập" id="return" />
+            </div>
+            <p style="margin-top:10px;">Bạn chưa có tài khoản? @Html.ActionLink("Đăng kí", "Create", "Customer", new { @class = "link" })</p>
+        </div>
+    </div>
+}
+

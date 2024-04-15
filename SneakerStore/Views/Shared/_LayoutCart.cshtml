@@ -1,0 +1,128 @@
+﻿﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            margin: 0;
+            background-color: #f5f5f5;
+            padding: 0;
+        }
+
+        #div-footer {
+            position: fixed;
+            text-align: center;
+            bottom: 0;
+            left: 0;
+            padding-top: 15px;
+            height: 50px;
+            width: 100%;
+            background-color: #ededed;
+        }
+
+        li.format-hello {
+            padding-top: 5px;
+            color: white;
+        }
+
+        #header-nav {
+            float: right;
+            padding-right: 80px;
+            color: white;
+        }
+
+        #header-nav-list {
+            list-style: none;
+            font-size: 15px;
+            font-weight: 200;
+            margin: 6px;
+        }
+
+        #header-nav-item {
+            display: inline-block;
+            margin: 5px;
+            margin-top: 0;
+            color: white;
+            font-size: 15px;
+        }
+
+        #header-icon, .item {
+            color: white;
+            text-decoration: none;
+        }
+
+            #header-icon:hover, .item:hover {
+                text-decoration: none;
+                color: whitesmoke;
+            }
+
+        #header-icon, .item {
+            color: white;
+        }
+
+            #header-icon:hover, .item:hover {
+                text-decoration: none;
+                color: whitesmoke;
+            }
+    </style>
+</head>
+
+<body>
+
+    <div style="background-color:white; height:100px;">
+        <h2 style="margin:0; padding-top:40px; padding-left:170px; color:#ee4d2d; font-weight:100;">DOGBEE | Giỏ hàng</h2>
+    </div>
+
+    <div style="background-color:#ee4d2d; height:30px">
+        <nav id="header-nav">
+            <ul id="header-nav-list" style="list-style:none;">
+                @if (Session["NameCus"] == null)
+                {
+
+                    <li id="header-nav-item">
+                        <a href="/Customers/Create" class="item" style="text-decoration:none;">
+                            <span id="header-icon"></span>
+                            Đăng ký
+                        </a>
+                    </li>
+                    <li style="margin:0;" id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="/Customers/LoginCus" class="item " style="text-decoration: none;">
+                            <span id="header-icon"></span>
+                            Đăng nhập
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li id="header-nav-item"><span><text class="glyphicon glyphicon-user"></text> @Session["UserName"]</span></li>
+                    <li id="header-nav-item">
+                        <span>|</span>
+                    </li>
+                    <li id="header-nav-item">
+                        <a href="@Url.Action("LogOutCus", "Customers")" class="item">
+                            <span id="header-icon"></span>
+                            Đăng xuất
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+
+    <div style="margin:0 160px; margin-bottom:80px;">
+        @RenderBody()
+    </div>
+    <div id="div-footer" ">
+        <p>&copy; @DateTime.Now.Year - DOGBEE STORE - HUFLIT</p>
+    </div>
+</body>
+</html>
