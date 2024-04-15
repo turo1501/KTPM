@@ -4,6 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
+using System.ComponentModel.DataAnnotations;
+
+
+
 namespace SneakerStore.Models
 {
     public class CartItem
@@ -93,5 +97,14 @@ namespace SneakerStore.Models
             items.Clear();
         }
 
+        public class YourModelName
+        {
+            [Required(ErrorMessage = "Vui lòng nhập NameCate")]
+            public string NameCate { get; set; }
 
+            // Các trường khác của model của bạn...
+        }
+
+    }
 }
+
