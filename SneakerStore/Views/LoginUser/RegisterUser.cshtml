@@ -1,0 +1,121 @@
+﻿@model SneakerStore.Models.AdminUser
+
+@{
+    ViewBag.Title = "RegisterUser";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    #div-thongTin {
+        height: 100%;
+        width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 0 5px 1px #212121;
+        text-align: center;
+        border-radius: 5px;
+        background-color: white;
+    }
+    .id {
+        height: 40px;
+        width: 340px;
+        margin-top: 25px;
+
+    }
+
+    h1 {
+        padding-top: 25px;
+        padding-left: 30px;
+        font-size: 25px;
+        font-weight: 100;
+        text-align: left;
+        margin:0;
+    }
+
+    p {
+        margin: 0;
+        font-size: 17px;
+        font-family: 'Times New Roman';
+    }
+
+    #return {
+        width: 340px;
+        height: 40px;
+        background-color: #ee4d2d;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 2px;
+        cursor: pointer;
+        border: 0;
+        color: white;
+    }
+
+    #div-return {
+        text-align: center;
+        margin-top: 0 10px;
+    }
+
+    #checkbox {
+        display: inline-block;
+        font-size: 15px;
+    }
+    .id, .password,.role,.comfirm {
+        height: 40px;
+        width: 340px;
+        margin:5px;
+    }
+    .link{
+        color:#ee5d61;
+        text-decoration:none;
+    }
+        .link:hover {
+            color: #ee5d61;
+            text-decoration: none;
+        }
+</style>
+
+@using (Html.BeginForm("RegisterUser", "LoginUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div id="div-thongTin">
+
+    <h1>Đăng kí tài khoản Admin</h1>
+
+    @Html.AntiForgeryToken()
+    <p>@Html.EditorFor(model => model.ID, new { htmlAttributes = new { placeholder = "ID...", style = "field-validation-error", @class = "id" } })</p>
+    <p>
+        @Html.ValidationMessageFor(model => model.ID)
+    </p>
+
+    @if (ViewBag.ErrorRegister != null)
+    {
+        <p>@ViewBag.ErrorRegister</p>
+    }
+
+
+    <p>@Html.EditorFor(model => model.NameUser, new { htmlAttributes = new { placeholder = "Tên tài khoản ...", @class = "id" } })</p>
+    <p>@Html.ValidationMessageFor(model => model.NameUser) </p>
+
+    <p>@Html.EditorFor(model => model.RoleUser, new { htmlAttributes = new { placeholder = "Vị trí ...", @class = "role" } })</p>
+    <p>@Html.ValidationMessageFor(model => model.RoleUser) </p>
+
+    <p>@Html.EditorFor(model => model.PasswordUser, new { htmlAttributes = new { placeholder = "Mật khẩu ...", @class = "password" } })</p>
+    <p>@Html.ValidationMessageFor(model => model.PasswordUser) </p>
+
+    <p>@Html.EditorFor(model => model.ConfirmPass, new { htmlAttributes = new { placeholder = "Xác nhận mật khẩu ...", @class = "comfirm"} })</p>
+    <p>@Html.ValidationMessageFor(model => model.ConfirmPass) </p>
+
+    <div id="div-return">
+        <input type="submit" value="Đăng kí" id="return" />
+    </div>
+
+    <p style="margin-top:10px;">Bạn đã có tài khoản? @Html.ActionLink("Đăng nhập","FormLogin","LoginUser", new { @class = "link" })</p>
+</div>
+}
+
+    

@@ -1,0 +1,141 @@
+﻿@model SneakerStore.Models.Cart
+
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+<style>
+    body {
+        padding: 0;
+    }
+</style>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>   
+                <th>Hình sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item._quantity * (decimal)item._product.Price.Value;
+                <tr>
+                    <td>@Html.DisplayFor(model => item._product.NamePro)</td>
+                    <td>
+                        <img src="@Url.Content(item._product.ImagePro)" height="100" width="100" />
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", item._product.Price)
+                        <span class="items-dong" style="font-size:16px;">₫</span>
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@item._product.ProductID" name="idPro" />
+                            <input type="number" value="@item._quantity" name="cartQuantity" />
+                            <input type="submit" value="Update" />
+                        }
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", @total)
+                        <span class="items-dong" style="font-size:16px;">₫</span>
+                    </td>
+                    <td>
+                        <a href="/ShoppingCart/RemoveCart/@item._product.ProductID">Xóa</a>
+                    </td>
+                    <td></td>
+
+                </tr>
+
+            }
+
+            <tr>
+                <td>
+                    <h2>Mã giảm giá</h2>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    @using (Html.BeginForm("ApplyDiscountCode", "ShoppingCart"))
+                    {
+                        <label for="discountCode">Nhập mã giảm giá:</label>
+                        <input type="text" name="discountCode" />
+                        <input type="submit" value="Apply" />
+                    }
+                </td>
+
+            </tr>
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="4">
+                    @using (Html.BeginForm("PaymentWithPaypal", "ShoppingCart"))
+                    {
+                        <table style="border-collapse:separate;border-spacing:5px;">
+                            <td></td>
+                            @if (Session["UserName"] == null)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td style="color:#ff0000;">Vui lòng đăng nhập để thanh toán</td>
+                                    <td>
+                                        <a href="@Url.Action("LoginCus","Customers")" class="btn btn-success">Đăng nhập</a>
+                                    </td>
+                                </tr>
+
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td><input type="hidden" name="CodeCustomer" value="@Session["IDCus"]" required /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Địa chỉ giao hàng:</td>
+                                    <td><input type="text" name="AddressDelivery" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại:</td>
+                                    <td><input type="text" name="PhoneNumber" required /></td>
+                                </tr>
+
+                            }
+
+                            <td colspan="6" style="text-align:right;font-size:20px;color:#ee4d2d">
+                                <hr />
+                                Tổng tiền: @String.Format("{0:0,0}", @Model.Total_price_after_dis())
+                                <span class="items-dong" style="font-size:20px;">₫</span>
+                                <input type="submit" value="Thanh toán" name="CheckOut" class="btn btn-warning" />
+                            </td>
+                        </table>
+                    }
+
+                </td>
+            </tr>
+        <td>
+            <a style="color:orangered; text-decoration:none;" href="@Url.Action("Index","Product")">Tìm các sản phẩm khác</a>
+        </td>
+        </tfoot>
+    </table>
+}
+else
+{
+    @Html.Partial("EmptyCart");
+}
